@@ -78,6 +78,11 @@ const CONTACT_EMAIL = 'contact@example.com';
         t.tabIndex = on ? 0 : -1;
         panels[j].hidden = !on;
       });
+      // Safari can skip lazy images that started inside a hidden panel; force them to load when shown.
+      $$('img', panels[i]).forEach((img) => {
+        if (img.loading === 'lazy') img.loading = 'eager';
+        if (img.complete && img.naturalWidth === 0) { const s = img.src; img.src = ''; img.src = s; }
+      });
       if (focus) tabs[i].focus();
     }
 
