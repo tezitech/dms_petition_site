@@ -144,7 +144,7 @@ Search the project for **`TODO`** to find every spot to check before launch.
 ## Pre-launch checklist
 
 - [ ] Deploy the Apps Script and set `SCRIPT_URL` in `main.js`; submit a test signature, then delete the test row
-- [ ] Set the real contact email (footer + `CONTACT_EMAIL`)
+- [x] Set the real contact email (footer + `CONTACT_EMAIL`)
 - [ ] Confirm the organizer line in the footer and on the flyer
 - [ ] Replace the placeholder source links with exact document URLs
 - [ ] Review the headline, concerns, petition wording, and privacy note (all marked `TODO`)
