@@ -611,3 +611,13 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--
 .qr-dialog img { width: min(86vw, 62dvh); height: auto; }
 .qr-dialog-url { margin: 0; font-size: 1.25rem; font-weight: 800; color: var(--green-800); overflow-wrap: anywhere; }
 .qr-dialog-tip { margin: 0 0 8px; color: var(--ink-soft); font-size: .95rem; }
+
+/* "What We Want" (PTA statement) */
+.want-list { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 12px; max-width: 52em; }
+.want-list li {
+  background: var(--white); border: 1px solid var(--line); border-left: 5px solid var(--green-700);
+  border-radius: var(--radius-sm); padding: 16px 18px;
+}
+.want-list strong { color: var(--green-900); }
+.join-us { margin: 24px 0 0; font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--green-900); }
+.join-us + .ask-cta { margin-top: 12px; }
