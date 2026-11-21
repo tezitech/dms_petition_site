@@ -44,7 +44,7 @@ fs.mkdirSync(outDir, { recursive: true });
 const opts = {
   errorCorrectionLevel: 'M', // survives small smudges on printed flyers
   margin: 4,                 // the "quiet zone" scanners need
-  color: { dark: '#1d3d25', light: '#ffffff' },
+  color: { dark: '#141f6b', light: '#ffffff' },
 };
 
 (async () => {
