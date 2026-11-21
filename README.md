@@ -10,7 +10,7 @@ flyer.html          Printable 8.5x11 flyer with the QR code
 apps-script/Code.gs Google Apps Script that stores signatures in your Sheet
 scripts/make-qr.js  Generates the QR code and sets your domain in the meta tags
 public/             QR code output (qr-sign.png, qr-sign.svg)
-images/             site-plan(-full).jpg (Sheet AS1.1), phasing-plan(-full).jpg (Sheet G1.2), og-image.jpg, favicon.svg
+images/             site-plan(-full).jpg (Sheet AS1.1), phasing-plan(-full).jpg (Sheet G1.2), og-image.jpg, coalition-banner.jpg, dmsicon.jpg (PTA logo) + favicon/apple-touch-icon/header sizes made from it
 vercel.json         Tells Vercel to serve the repo root as-is (see note below)
 .vercelignore       Keeps scripts/, apps-script/, etc. out of the deployment
 ```
