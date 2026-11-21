@@ -621,3 +621,10 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--
 .want-list strong { color: var(--green-900); }
 .join-us { margin: 24px 0 0; font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--green-900); }
 .join-us + .ask-cta { margin-top: 12px; }
+
+/* Coalition banner at the top of the hero */
+.hero-banner {
+  width: 100%; max-width: 640px; height: auto; margin: 0 0 24px;
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+@media (max-width: 600px) { .hero-inner { padding-top: 20px; } }
