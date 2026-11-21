@@ -4,9 +4,9 @@
 
 /* ---------- CONFIG: edit these before launch ---------- */
 
-// TODO: Paste your Google Apps Script web-app URL here (see README, "Google Sheet setup").
-// It looks like: https://script.google.com/macros/s/AKfy..../exec
-const SCRIPT_URL = '';
+// Google Apps Script web-app URL (see README, "Google Sheet setup").
+// If you redeploy as a NEW deployment, paste the new /exec URL here.
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyjCp2WNlY57a8bv-eTMXuVyauWJC2m8IfbIcQnp5T2PNFv5SX6uqFn_IggA22vmj97/exec';
 
 // TODO: Replace with the campaign's real contact email (also update the footer in index.html).
 const CONTACT_EMAIL = 'contact@example.com';
