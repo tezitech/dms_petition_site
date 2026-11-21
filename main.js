@@ -158,6 +158,59 @@ const CONTACT_EMAIL = 'contact@example.com';
       .catch(() => { /* Count is a nice-to-have; stay hidden on failure. */ });
   }
 
+  /* ---------- Sharing: link + full-screen QR code ---------- */
+  // Share the canonical address (set by `npm run qr`), so links from preview deployments still point to the real site.
+  const canonical = $('link[rel="canonical"]');
+  const siteOrigin = canonical && /^https?:\/\/(?!YOUR-DOMAIN)/.test(canonical.href)
+    ? new URL(canonical.href).origin
+    : location.origin;
+  const shareUrl = `${siteOrigin}/#sign`;
+  $$('[data-site-host]').forEach((el) => { el.textContent = new URL(siteOrigin).host; });
+
+  async function shareLink(btn) {
+    const scope = btn.closest('[data-share-scope]');
+    const msg = scope && $('[data-share-msg]', scope);
+    const say = (t) => { if (msg) msg.textContent = t; };
+    const data = { title: document.title, text: 'Ask Fort Worth ISD to pause the Daggett Montessori contract and plan it right for a K-8 Montessori. Sign the petition.', url: shareUrl };
+    try {
+      if (navigator.share) { await navigator.share(data); return; }
+      await navigator.clipboard.writeText(shareUrl);
+      say('Link copied. Paste it into a text or email.');
+    } catch (err) {
+      if (err && err.name === 'AbortError') return;
+      say(`Share this link: ${shareUrl}`);
+    }
+  }
+
+  const qrDialog = $('#qr-dialog');
+  let qrOpener = null;
+  function openQr(btn) {
+    if (!qrDialog || typeof qrDialog.showModal !== 'function') {
+      window.open('public/qr-sign.svg', '_blank', 'noopener');
+      return;
+    }
+    qrOpener = btn;
+    qrDialog.showModal();
+    document.body.style.overflow = 'hidden';
+    $('[data-qr-close]', qrDialog).focus();
+  }
+  if (qrDialog) {
+    qrDialog.addEventListener('close', () => {
+      document.body.style.overflow = '';
+      if (qrOpener && document.contains(qrOpener)) qrOpener.focus();
+    });
+    // Tap anywhere (or "Done") to close.
+    qrDialog.addEventListener('click', () => qrDialog.close());
+  }
+
+  // Delegated so buttons added later (the thank-you screen) work too.
+  document.addEventListener('click', (e) => {
+    const shareBtn = e.target.closest('[data-share]');
+    if (shareBtn) { shareLink(shareBtn); return; }
+    const qrBtn = e.target.closest('[data-qr-open]');
+    if (qrBtn) openQr(qrBtn);
+  });
+
   /* ---------- Petition form ---------- */
   const form = $('#petition-form');
   if (!form) return;
@@ -232,35 +285,24 @@ const CONTACT_EMAIL = 'contact@example.com';
   }
 
   function showThanks(firstName) {
-    const shareUrl = `${location.origin}${location.pathname}#sign`;
     const wrap = document.createElement('div');
     wrap.className = 'thanks';
     wrap.tabIndex = -1;
     wrap.setAttribute('role', 'status');
+    wrap.setAttribute('data-share-scope', '');
     wrap.innerHTML = `
       <div class="thanks-icon" aria-hidden="true">&#10003;</div>
       <h3>Thank you${firstName ? ', ' + escapeHtml(firstName) : ''}!</h3>
-      <p>Your name has been added to the petition. The best thing you can do next is share it with other Daggett families and neighbors.</p>
+      <p>Your name has been added. Now hand your phone to a neighbor: they can scan this code to sign too.</p>
+      <img class="thanks-qr" src="public/qr-sign.svg" width="180" height="180" alt="QR code that opens the petition sign-up form.">
       <div class="thanks-actions">
-        <button type="button" class="btn btn-primary" data-share>Share the petition</button>
+        <button type="button" class="btn btn-primary" data-qr-open>Show full screen</button>
+        <button type="button" class="btn btn-ghost" data-share>Share link</button>
         <a class="btn btn-ghost" href="flyer.html">Print a flyer</a>
       </div>
       <p class="field-help" data-share-msg aria-live="polite"></p>`;
     form.replaceWith(wrap);
     wrap.focus();
-
-    $('[data-share]', wrap).addEventListener('click', async () => {
-      const msg = $('[data-share-msg]', wrap);
-      const data = { title: document.title, text: 'Ask Fort Worth ISD to pause the Daggett Montessori contract and plan it right for a K-8 Montessori. Sign the petition.', url: shareUrl };
-      try {
-        if (navigator.share) { await navigator.share(data); return; }
-        await navigator.clipboard.writeText(shareUrl);
-        msg.textContent = 'Link copied. Paste it into a text or email.';
-      } catch (err) {
-        if (err && err.name === 'AbortError') return;
-        msg.textContent = `Share this link: ${shareUrl}`;
-      }
-    });
 
     if (signatureCount !== null) { signatureCount += 1; renderCount(); }
   }
