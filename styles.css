@@ -545,3 +545,16 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--
 @media (max-width: 600px) {
   .plan-marker { width: 22px; height: 22px; font-size: .75rem; border-width: 1.5px; }
 }
+
+/* Old vs. new campus comparison */
+.compare { display: grid; gap: 14px; margin: 16px 0 10px; }
+.compare-card {
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 18px 20px; box-shadow: var(--shadow);
+}
+.compare-card ul { margin: 8px 0 0; padding-left: 1.1em; }
+.compare-card li { margin-bottom: .3em; }
+.compare-label { margin: 0; font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--clay-700); }
+.compare-place { margin: 2px 0 0; font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; color: var(--green-900); }
+.compare-card--diff { background: var(--clay-100); border-color: #ecd3c1; }
+@media (min-width: 768px) { .compare { grid-template-columns: repeat(3, 1fr); } }
