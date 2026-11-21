@@ -63,8 +63,39 @@ const CONTACT_EMAIL = 'contact@example.com';
 
   /* ---------- Upgrades: collapsed on phones, open on larger screens ---------- */
   if (window.matchMedia('(min-width: 768px)').matches) {
-    $$('#upgrades details').forEach((d) => { d.open = true; });
+    $$('.accordion details').forEach((d) => { d.open = true; });
   }
+
+  /* ---------- Plan tabs (Phasing Plan is the default) ---------- */
+  $$('[data-tabs]').forEach((tabsEl) => {
+    const tabs = $$('[role="tab"]', tabsEl);
+    const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls')));
+
+    function select(i, focus) {
+      tabs.forEach((t, j) => {
+        const on = i === j;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        panels[j].hidden = !on;
+      });
+      if (focus) tabs[i].focus();
+    }
+
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(i, false));
+      t.addEventListener('keydown', (e) => {
+        let next = null;
+        if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+        if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        if (e.key === 'Home') next = 0;
+        if (e.key === 'End') next = tabs.length - 1;
+        if (next !== null) { e.preventDefault(); select(next, true); }
+      });
+    });
+
+    // Without JavaScript both drawings stay visible; with it, show the first tab.
+    select(0, false);
+  });
 
   /* ---------- Plan sheets: full-size viewer (site plan, phasing plan) ---------- */
   const planDialog = $('#plan-dialog');
