@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flyer | Build Daggett Montessori Right</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --green-900: #1d3d25; --green-800: #2b5a36; --green-50: #f1f6ee;
+      --clay-700: #8f4a24; --clay-500: #b8693d; --ink: #23281f; --ink-soft: #4a5145;
+      --font-head: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #e9e5dc; font-family: var(--font-body); color: var(--ink); }
+
+    .toolbar {
+      max-width: 8.5in; margin: 16px auto; padding: 0 16px;
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 16px;
+    }
+    .toolbar button, .toolbar a {
+      min-height: 44px; padding: 10px 20px; border-radius: 999px; font: inherit; font-weight: 700;
+      border: 2px solid var(--green-800); cursor: pointer; text-decoration: none;
+    }
+    .toolbar button { background: var(--green-800); color: #fff; }
+    .toolbar a { background: #fff; color: var(--green-900); }
+
+    /* The page: 8.5 x 11 in */
+    .page {
+      width: 8.5in; height: 11in; margin: 0 auto 24px; background: #fff;
+      padding: 0.6in 0.65in 0.5in; display: flex; flex-direction: column;
+      box-shadow: 0 4px 24px rgba(0,0,0,.15); position: relative; overflow: hidden;
+    }
+    .page::before {
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 0.28in;
+      background: linear-gradient(90deg, var(--green-800), var(--clay-500));
+    }
+    .eyebrow {
+      margin: 0.1in 0 0.12in; font-size: 13pt; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--clay-700);
+    }
+    h1 {
+      font-family: var(--font-head); color: var(--green-900);
+      font-size: 40pt; line-height: 1.08; margin: 0 0 0.22in;
+    }
+    ul { margin: 0 0 0.2in; padding: 0; list-style: none; }
+    li {
+      font-size: 15.5pt; line-height: 1.35; margin-bottom: 0.13in; padding-left: 0.38in; position: relative;
+    }
+    li::before {
+      content: ""; position: absolute; left: 0.05in; top: 0.09in; width: 0.16in; height: 0.16in;
+      border-radius: 50%; background: var(--clay-500);
+    }
+    .qr-block {
+      margin-top: auto; display: flex; gap: 0.4in; align-items: center;
+      background: var(--green-50); border: 2px solid #d9e5d3; border-radius: 0.2in; padding: 0.3in;
+    }
+    .qr-block img { width: 3.1in; height: 3.1in; flex: 0 0 auto; background: #fff; }
+    .scan { font-family: var(--font-head); font-size: 34pt; font-weight: 700; color: var(--green-900); margin: 0 0 0.08in; line-height: 1.1; }
+    .scan-sub { font-size: 14pt; margin: 0 0 0.2in; color: var(--ink-soft); }
+    .url { font-size: 20pt; font-weight: 800; color: var(--green-800); overflow-wrap: anywhere; margin: 0; line-height: 1.15; }
+    .dates { font-size: 12.5pt; margin: 0.22in 0 0; color: var(--ink); }
+    .foot { margin: 0.18in 0 0; font-size: 10pt; color: var(--ink-soft); }
+
+    @media screen and (max-width: 8.8in) {
+      /* On phones, show a fluid preview. Printing always uses the exact 8.5x11 layout below. */
+      .page { width: auto; height: auto; min-height: 0; margin: 0 12px 24px; padding: 32px 20px 24px; }
+      h1 { font-size: 28pt; }
+      li { font-size: 13pt; }
+      .qr-block { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .qr-block img { width: 100%; max-width: 3.1in; height: auto; }
+      .scan { font-size: 26pt; }
+    }
+    @page { size: letter portrait; margin: 0; }
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .page { margin: 0; box-shadow: none; width: 8.5in; height: 11in; padding: 0.6in 0.65in 0.5in; }
+      h1 { font-size: 40pt; } li { font-size: 15.5pt; } .scan { font-size: 34pt; }
+      .qr-block { flex-direction: row; align-items: center; gap: 0.4in; }
+      .qr-block img { width: 3.1in; height: 3.1in; max-width: none; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button type="button" onclick="window.print()">Print flyer</button>
+    <a href="index.html">Back to the site</a>
+    <span>Tip: print at 100% scale on letter paper.</span>
+  </div>
+
+  <main class="page">
+    <p class="eyebrow">Daggett Montessori (K-8) &middot; 1419 College Ave</p>
+    <!-- TODO: Confirm flyer headline and bullet wording. -->
+    <h1>Pause the contract. Plan Daggett Montessori right.</h1>
+    <ul>
+      <li>Daggett Montessori, a K-8 school, was moved from a larger building into one designed only for K-5. The renovation plan adds no classrooms and has one science lab for all of grades 6-8.</li>
+      <li>It paves the school's south green space for a 34-space parking lot and a detention pond.</li>
+      <li>We're asking FWISD to pause the contract, build a comprehensive K-8 Montessori plan with families and teachers, and base the project on it.</li>
+    </ul>
+
+    <div class="qr-block">
+      <!-- Generated by `npm run qr -- https://your-domain`. Until then this shows a placeholder. -->
+      <img src="public/qr-sign.svg" alt="QR code linking to the petition sign-up form" width="300" height="300">
+      <div>
+        <p class="scan">Scan to sign</p>
+        <p class="scan-sub">Takes less than a minute.</p>
+        <!-- TODO: Updated automatically by `npm run qr -- https://your-domain`. -->
+        <p class="url"><span data-site-url>YOUR-DOMAIN.example</span></p>
+        <!-- Dates verified against CSP #27-015 Division 00 (11/20/2026). -->
+        <p class="dates"><strong>Proposals due Dec 10, 2026</strong> &middot; <strong>Board vote expected Feb 9, 2027</strong></p>
+      </div>
+    </div>
+    <p class="foot">Build Daggett Montessori Right &middot; Organized by the Daggett Montessori PTA &middot; Information from public FWISD documents.</p>
+  </main>
+</body>
+</html>

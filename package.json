@@ -1,0 +1,13 @@
+{
+  "name": "daggett-petition-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static advocacy site for the Daggett Montessori renovation. No build step.",
+  "scripts": {
+    "qr": "node scripts/make-qr.js",
+    "preview": "npx --yes serve@14.2.4 -l 3000 ."
+  },
+  "devDependencies": {
+    "qrcode": "1.5.4"
+  }
+}
