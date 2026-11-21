@@ -558,3 +558,4 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--
 .compare-place { margin: 2px 0 0; font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; color: var(--green-900); }
 .compare-card--diff { background: var(--clay-100); border-color: #ecd3c1; }
 @media (min-width: 768px) { .compare { grid-template-columns: repeat(3, 1fr); } }
+.compare-note { margin: 0; font-size: .95rem; color: var(--ink-soft); }
