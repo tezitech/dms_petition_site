@@ -540,3 +540,8 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--
     position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
   }
 }
+
+/* Smaller plan markers on phones so they don't cover the drawing. */
+@media (max-width: 600px) {
+  .plan-marker { width: 22px; height: 22px; font-size: .75rem; border-width: 1.5px; }
+}

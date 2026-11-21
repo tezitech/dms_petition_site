@@ -10,7 +10,7 @@ flyer.html          Printable 8.5x11 flyer with the QR code
 apps-script/Code.gs Google Apps Script that stores signatures in your Sheet
 scripts/make-qr.js  Generates the QR code and sets your domain in the meta tags
 public/             QR code output (qr-sign.png, qr-sign.svg)
-images/             site-plan.jpg (placeholder), og-image.jpg (social preview), favicon.svg
+images/             site-plan(-full).jpg (Sheet AS1.1), phasing-plan(-full).jpg (Sheet G1.2), og-image.jpg, favicon.svg
 vercel.json         Tells Vercel to serve the repo root as-is (see note below)
 .vercelignore       Keeps scripts/, apps-script/, etc. out of the deployment
 ```
@@ -131,8 +131,8 @@ Before printing, scan the QR code with your phone to confirm it opens the petiti
 | "Last updated" date | `index.html`: in `#sources` **and** in the footer disclaimer |
 | Organizer name, contact email | `index.html` footer **and** `CONTACT_EMAIL` in `main.js` |
 | Petition backend URL | `SCRIPT_URL` in `main.js` |
-| Site plan image | Replace `images/site-plan.jpg` (keep the name). Aim for about 2000px wide and under ~600 KB. [Squoosh](https://squoosh.app) works well. If the proportions differ from 1600×1100, update `width`/`height` on the `<img>` in `#plan`. |
-| Numbered markers on the plan | Optional. In `#plan`, set each `.plan-marker`'s `--x`/`--y` (percent from the left/top of the image) and remove `plan-markers-off` from the `<figure>`. |
+| Plan sheets | `images/site-plan.jpg` / `site-plan-full.jpg` are Sheet AS1.1 (as revised in Addendum 2). `images/phasing-plan.jpg` / `phasing-plan-full.jpg` are Sheet G1.2. Each sheet has a 1600px preview and a 3600px full-size version, rendered from the FWISD Plan Room viewer. Keep DLR Group's title block and copyright notice on them, and keep the credit in the caption. If a later addendum revises a sheet, replace both files. |
+| Numbered markers on the site plan | In `#plan`, each `.plan-marker` has `--x`/`--y` (percent from the left/top of the sheet). Update them if you replace the sheet. |
 | Social preview image | `images/og-image.jpg` (1200×630) |
 | Flyer text | `flyer.html` |
 | Colors | CSS variables at the top of `styles.css` |
@@ -143,7 +143,6 @@ Search the project for **`TODO`** to find every spot to check before launch.
 
 ## Pre-launch checklist
 
-- [ ] Replace `images/site-plan.jpg` with the real site plan
 - [ ] Deploy the Apps Script and set `SCRIPT_URL` in `main.js`; submit a test signature, then delete the test row
 - [ ] Set the real contact email (footer + `CONTACT_EMAIL`)
 - [ ] Confirm the organizer line in the footer and on the flyer

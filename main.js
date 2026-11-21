@@ -66,27 +66,34 @@ const CONTACT_EMAIL = 'contact@example.com';
     $$('#upgrades details').forEach((d) => { d.open = true; });
   }
 
-  /* ---------- Site plan: full-size viewer ---------- */
+  /* ---------- Plan sheets: full-size viewer (site plan, phasing plan) ---------- */
   const planDialog = $('#plan-dialog');
-  const planOpen = $('[data-plan-open]');
+  const planLinks = $$('[data-plan-open]');
   const planFull = $('[data-plan-full]');
+  const planRaw = $('[data-plan-raw]');
   let zoom = 1;
+  let lastPlanLink = null;
 
   function setZoom(z) {
     zoom = Math.min(4, Math.max(1, z));
     planFull.style.setProperty('--zoom', zoom);
   }
 
-  if (planDialog && typeof planDialog.showModal === 'function' && planOpen) {
-    planOpen.addEventListener('click', (e) => {
+  if (planDialog && typeof planDialog.showModal === 'function' && planLinks.length) {
+    planLinks.forEach((link) => link.addEventListener('click', (e) => {
       e.preventDefault();
-      if (!planFull.src) planFull.src = planFull.dataset.src;
+      lastPlanLink = link;
+      const thumb = $('img', link);
+      planFull.src = link.getAttribute('href');
+      planFull.alt = thumb ? `${thumb.alt} Full size.` : 'Plan sheet, full size.';
+      if (planRaw) planRaw.href = link.getAttribute('href');
+      planDialog.setAttribute('aria-label', link.dataset.planLabel || 'Plan sheet, full size');
       // Phones get a 2x start so details are readable; larger screens fit to width.
       setZoom(window.innerWidth < 768 ? 2 : 1);
       planDialog.showModal();
       document.body.style.overflow = 'hidden';
       $('[data-close]', planDialog).focus();
-    });
+    }));
     planDialog.addEventListener('click', (e) => {
       const btn = e.target.closest('button');
       if (!btn) return;
@@ -96,7 +103,7 @@ const CONTACT_EMAIL = 'contact@example.com';
     });
     planDialog.addEventListener('close', () => {
       document.body.style.overflow = '';
-      planOpen.focus();
+      if (lastPlanLink) lastPlanLink.focus();
     });
   }
   // Without <dialog> support the link simply opens the image itself.
