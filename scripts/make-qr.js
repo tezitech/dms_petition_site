@@ -70,7 +70,9 @@ const opts = {
   const flyerPath = path.join(root, 'flyer.html');
   let flyer = fs.readFileSync(flyerPath, 'utf8');
   const display = origin.replace(/^https?:\/\//, '');
-  flyer = flyer.replace(/(<span data-site-url>)[^<]*(<\/span>)/g, `$1${display}$2`);
+  // Allow line breaks only at the dots so long addresses wrap cleanly on the flyer.
+  const flyerDisplay = display.replace(/\./g, '<wbr>.');
+  flyer = flyer.replace(/(<span data-site-url>)[\s\S]*?(<\/span>)/g, `$1${flyerDisplay}$2`);
   fs.writeFileSync(flyerPath, flyer);
   console.log(`  updated flyer.html (printed URL: ${display})`);
 })().catch((err) => {
